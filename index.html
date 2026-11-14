@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinyal Sawah — Coworking &amp; Co-living di Ubud, Canggu, Tabanan</title>
+<meta name="description" content="Demo landing page Sinyal Sawah: coworking dan co-living untuk nomad digital di Ubud, Canggu, dan Tabanan, lengkap dengan portal keanggotaan, tagihan bulanan, dan akses pintu digital.">
+<meta name="theme-color" content="#101442">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101442'/%3E%3Cpath d='M6 25h5v-5H6zm8 0h5V14h-5zm8 0h5V7h-5z' fill='%23ffb81c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3f2ea; --paper-2:#e7e5d6; --white:#fffdf7;
+  --ink:#101442; --ink-2:#3d416d;
+  --indigo:#2e35d6; --indigo-soft:#d9dbf7;
+  --gold:#ffb81c; --gold-soft:#fff0c2;
+  --green:#17795a; --green-soft:#d6efe2;
+  --red:#b72a17; --red-soft:#fde1db;
+  --amber:#8a5a00;
+  --bw:2px; --sh:4px 4px 0 var(--ink);
+  --f-head:'Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --maxw:1200px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+html:has(dialog[open]){overflow:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--f-head);line-height:1.08;margin:0;letter-spacing:-.02em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--indigo);outline-offset:3px}
+.sec-dark :focus-visible,.cta :focus-visible,footer :focus-visible{outline-color:var(--gold)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--gold);border:var(--bw) solid var(--ink);padding:8px 14px;z-index:100;font-weight:700}
+.skip:focus{top:12px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.mono{font-family:var(--f-mono)}
+
+/* ===== tombol & komponen dasar ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;background:var(--white);color:var(--ink);border:var(--bw) solid var(--ink);box-shadow:var(--sh);font-family:var(--f-head);font-weight:600;font-size:1rem;text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s,background .12s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn[disabled]{opacity:.6;cursor:progress;transform:none;box-shadow:var(--sh)}
+.btn-gold{background:var(--gold)}
+.btn-indigo{background:var(--indigo);color:#fff}
+.btn-danger{background:var(--red-soft);color:var(--red)}
+.btn-sm{min-height:38px;padding:6px 14px;font-size:.92rem;box-shadow:3px 3px 0 var(--ink)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border:var(--bw) solid var(--ink);font-family:var(--f-mono);font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:var(--white)}
+.chip::before{content:"";width:7px;height:7px;background:currentColor;border-radius:50%}
+.chip-ok{background:var(--green-soft);color:var(--green)}
+.chip-ok::before{content:"✓";background:none;width:auto;height:auto;border-radius:0}
+.chip-warn{background:var(--gold-soft);color:var(--amber)}
+.chip-bad{background:var(--red-soft);color:var(--red)}
+.chip-bad::before{content:"!";background:none;width:auto;height:auto;border-radius:0}
+.chip-mute{background:var(--paper-2);color:var(--ink-2)}
+.kicker{font-family:var(--f-mono);font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;font-weight:500;margin-bottom:14px}
+.card{background:var(--white);border:var(--bw) solid var(--ink);padding:24px}
+
+/* ===== bar atas & navigasi ===== */
+.demo-bar{background:var(--paper-2);border-bottom:var(--bw) solid var(--ink);text-align:center;font-family:var(--f-mono);font-size:.76rem;padding:6px 12px;letter-spacing:.02em}
+.nav{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:var(--bw) solid var(--ink)}
+.nav-in{display:flex;align-items:center;gap:20px;min-height:70px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-head);font-weight:700;font-size:1.25rem;letter-spacing:-.03em}
+.logo svg{width:34px;height:34px;flex:none}
+.logo span b{background:var(--gold);padding:0 5px;margin-left:3px;border:var(--bw) solid var(--ink)}
+#menu{display:flex;gap:4px;margin-left:auto}
+#menu a{text-decoration:none;font-weight:600;padding:8px 12px;border:var(--bw) solid transparent}
+#menu a:hover{border-color:var(--ink)}
+#menu a[aria-current="true"]{background:var(--gold);border-color:var(--ink)}
+.nav-cta{margin-left:8px}
+.burger{display:none;margin-left:auto;width:46px;height:46px;background:var(--white);border:var(--bw) solid var(--ink);cursor:pointer;padding:0}
+.burger span{display:block;width:22px;height:3px;background:var(--ink);margin:4px auto}
+
+/* ===== hero ===== */
+.hero{padding:56px 0 64px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;border:var(--bw) solid var(--ink);background:var(--white);padding:6px 12px;margin-bottom:26px}
+.eyebrow .dot{width:10px;height:10px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(23,121,90,.2)}}
+.hero h1{font-size:clamp(2.7rem,6.4vw,5.2rem);font-weight:700;line-height:.98;letter-spacing:-.04em}
+.hero h1 mark{background:var(--gold);color:var(--ink);padding:0 .12em;border:var(--bw) solid var(--ink);box-shadow:var(--sh);display:inline-block;transform:rotate(-1.5deg)}
+.hero h1 .u{text-decoration:underline wavy var(--indigo) 4px;text-underline-offset:.14em;text-decoration-skip-ink:none}
+.lead{font-size:1.2rem;color:var(--ink-2);max-width:34em;margin:26px 0 30px}
+.hero-points{margin-top:34px;display:grid;gap:10px}
+.hero-points li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.hero-points svg{flex:none;width:22px;height:22px;margin-top:2px}
+.hero-art{position:relative;padding:0 0 0 0}
+.art{border:var(--bw) solid var(--ink);box-shadow:10px 10px 0 var(--ink);aspect-ratio:4/5;overflow:hidden;background:#ffe29a}
+.art svg{display:block;width:100%;height:100%}
+.pass{position:absolute;left:-28px;bottom:36px;width:226px;background:var(--white);border:var(--bw) solid var(--ink);box-shadow:var(--sh);padding:12px;transform:rotate(-3deg);transition:transform .2s}
+.pass:hover{transform:rotate(0) translateY(-4px)}
+.pass-top{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.pass-body{display:flex;gap:12px;align-items:center}
+.pass-qr{width:84px;height:84px;flex:none;border:var(--bw) solid var(--ink)}
+.pass-qr svg{display:block;width:100%;height:100%}
+.pass b{font-family:var(--f-head);display:block;line-height:1.15}
+.pass small{display:block;color:var(--ink-2);font-size:.78rem;margin:3px 0 6px}
+.sticker{position:absolute;top:-18px;right:-14px;width:108px;height:108px;border-radius:50%;background:var(--gold);border:var(--bw) solid var(--ink);box-shadow:var(--sh);display:grid;place-content:center;text-align:center;font-family:var(--f-head);font-weight:700;line-height:1;transform:rotate(10deg)}
+.sticker b{font-size:1.9rem;display:block}
+.sticker small{font-family:var(--f-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-top:4px}
+.float-inv{position:absolute;right:-10px;bottom:-22px;background:var(--indigo);color:#fff;border:var(--bw) solid var(--ink);box-shadow:var(--sh);padding:9px 14px;font-family:var(--f-mono);font-size:.78rem;display:flex;gap:8px;align-items:center}
+.float-inv i{font-style:normal;background:var(--gold);color:var(--ink);padding:1px 7px;font-weight:600}
+
+.marquee{background:var(--indigo);color:var(--gold);border-block:var(--bw) solid var(--ink);overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:mq 40s linear infinite}
+.marquee-track>div{display:flex}
+.marquee span{padding:13px 26px;font-family:var(--f-mono);font-size:.84rem;text-transform:uppercase;letter-spacing:.07em}
+.marquee span::after{content:"◆";margin-left:52px;color:#fff;opacity:.6}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+.stats{border-bottom:var(--bw) solid var(--ink);background:var(--white)}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:28px 24px;border-right:var(--bw) solid var(--ink)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--f-head);font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:8px;color:var(--ink-2);font-size:.95rem}
+.stat i{font-style:normal;font-family:var(--f-mono);font-size:.72rem;color:var(--ink-2)}
+
+/* ===== seksi umum ===== */
+.sec{padding:96px 0;border-bottom:var(--bw) solid var(--ink)}
+.sec-alt{background:var(--paper-2)}
+.sec-dark{background:var(--indigo);color:#fff}
+.sec-head{max-width:760px;margin-bottom:48px}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3.4rem);font-weight:700;letter-spacing:-.035em}
+.sec-head p{margin-top:16px;font-size:1.1rem;color:var(--ink-2)}
+.sec-dark .sec-head p{color:#dfe0ff}
+
+/* ===== lokasi ===== */
+.loc{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+.loc-tabs{display:grid;gap:14px}
+.loc-tab{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:2px;padding:16px 18px;background:var(--white);border:var(--bw) solid var(--ink);cursor:pointer;transition:transform .12s,box-shadow .12s}
+.loc-tab b{font-family:var(--f-head);font-size:1.5rem;letter-spacing:-.03em}
+.loc-tab small{color:var(--ink-2);font-size:.9rem}
+.loc-tab:hover{transform:translate(-2px,-2px);box-shadow:var(--sh)}
+.loc-tab[aria-selected="true"]{background:var(--gold);box-shadow:var(--sh);transform:translate(-2px,-2px)}
+.loc-tab[aria-selected="true"] small{color:var(--ink)}
+#loc-panel{display:block;background:var(--white);border:var(--bw) solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.loc-art{border-bottom:var(--bw) solid var(--ink);aspect-ratio:16/7;background:var(--green-soft);overflow:hidden}
+.loc-art svg{display:block;width:100%;height:100%}
+.loc-body{padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:8px 40px;align-items:start}
+.loc-body .lb-b .loc-nums{margin-top:0}
+.loc-body .kicker-s{font-family:var(--f-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.loc-body h3{font-size:2rem;margin:6px 0 4px;letter-spacing:-.03em}
+.loc-tag{font-weight:600;color:var(--indigo);margin-bottom:10px}
+.loc-nums{display:grid;grid-template-columns:repeat(3,1fr);border:var(--bw) solid var(--ink);margin:20px 0}
+.loc-nums li{padding:12px;border-right:var(--bw) solid var(--ink)}
+.loc-nums li:last-child{border-right:0}
+.loc-nums b{display:block;font-family:var(--f-head);font-size:1.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.loc-nums span{font-size:.8rem;color:var(--ink-2)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tags li{border:var(--bw) solid var(--ink);padding:3px 10px;font-size:.88rem;background:var(--paper)}
+.addr{display:flex;gap:8px;font-size:.95rem;color:var(--ink-2);margin-bottom:6px}
+.addr svg{flex:none;width:18px;height:18px;margin-top:3px}
+.from{margin-bottom:20px}
+.from b{font-family:var(--f-head);font-size:1.3rem}
+
+/* ===== pilar sistem ===== */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pillar{background:var(--white);border:var(--bw) solid var(--ink);padding:28px;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.pillar:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink)}
+.pillar .no{font-family:var(--f-mono);font-size:.85rem;font-weight:600;color:var(--indigo)}
+.pillar svg.ic{width:52px;height:52px;margin:14px 0 18px}
+.pillar h3{font-size:1.65rem;margin-bottom:10px}
+.pillar p{color:var(--ink-2)}
+.pillar ul{margin:18px 0 24px;display:grid;gap:9px}
+.pillar li{display:flex;gap:10px;font-size:.97rem}
+.pillar li::before{content:"";flex:none;width:10px;height:10px;background:var(--gold);border:var(--bw) solid var(--ink);margin-top:7px}
+.pillar a{margin-top:auto;font-family:var(--f-head);font-weight:600;text-decoration:none;border-bottom:var(--bw) solid var(--ink);align-self:flex-start}
+.pillar a:hover{background:var(--gold)}
+
+/* ===== paket ===== */
+.ctrls{display:flex;flex-wrap:wrap;gap:16px 28px;margin-bottom:32px;align-items:flex-end}
+.ctrl{display:grid;gap:6px}
+.ctrl>span{font-family:var(--f-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.seg{display:inline-flex;border:var(--bw) solid var(--ink);background:var(--white)}
+.seg button{border:0;border-right:var(--bw) solid var(--ink);background:transparent;padding:9px 16px;min-height:44px;font-weight:600;cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:var(--gold-soft)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.plan{position:relative;background:var(--white);border:var(--bw) solid var(--ink);padding:28px;display:flex;flex-direction:column}
+.plan.pop{background:var(--gold-soft);box-shadow:8px 8px 0 var(--ink)}
+.plan .badge{position:absolute;top:-14px;left:20px;background:var(--ink);color:var(--gold);font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px}
+.plan h3{font-size:1.5rem}
+.plan .sub{color:var(--ink-2);font-size:.95rem;margin:6px 0 18px;min-height:2.9em}
+.price{font-family:var(--f-head);font-size:2.5rem;font-weight:700;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-family:var(--f-body);font-size:.9rem;font-weight:500;letter-spacing:0;color:var(--ink-2)}
+.was{font-size:.9rem;color:var(--ink-2);text-decoration:line-through;min-height:1.4em;margin-bottom:2px}
+.plan ul{margin:20px 0 26px;display:grid;gap:9px;border-top:var(--bw) solid var(--ink);padding-top:20px}
+.plan li{display:flex;gap:10px;font-size:.96rem}
+.plan li svg{flex:none;width:18px;height:18px;margin-top:3px}
+.plan .btn{margin-top:auto}
+.daypass{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;border:var(--bw) dashed var(--ink);padding:18px 22px;background:var(--white)}
+
+/* ===== portal ===== */
+.win{background:var(--paper);color:var(--ink);border:var(--bw) solid var(--ink);box-shadow:10px 10px 0 var(--gold)}
+.win-bar{display:flex;align-items:center;gap:14px;padding:10px 16px;background:var(--ink);color:#fff;font-family:var(--f-mono);font-size:.78rem}
+.dots{display:flex;gap:6px}
+.dots i{width:11px;height:11px;border-radius:50%;background:var(--gold)}
+.dots i:nth-child(2){background:#fff}
+.dots i:nth-child(3){background:var(--indigo)}
+.win-date{margin-left:auto;color:var(--gold)}
+.win-head{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;padding:18px 24px;border-bottom:var(--bw) solid var(--ink);background:var(--white)}
+.win-head .who{display:flex;align-items:center;gap:14px}
+.avatar{width:50px;height:50px;background:var(--gold);border:var(--bw) solid var(--ink);display:grid;place-content:center;font-family:var(--f-head);font-weight:700;font-size:1.2rem;flex:none}
+.win-head h3{font-size:1.2rem}
+.win-head .meta{font-size:.85rem;color:var(--ink-2)}
+.win-head .chips{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.ptabs{display:flex;overflow-x:auto;border-bottom:var(--bw) solid var(--ink);background:var(--paper-2)}
+.ptabs button{flex:1 0 auto;border:0;border-right:var(--bw) solid var(--ink);background:transparent;padding:14px 22px;font-family:var(--f-head);font-weight:600;font-size:1rem;cursor:pointer;white-space:nowrap}
+.ptabs button:last-child{border-right:0}
+.ptabs button:hover{background:var(--gold-soft)}
+.ptabs button[aria-selected="true"]{background:var(--gold)}
+.ptabs .cnt{display:inline-block;min-width:22px;margin-left:6px;padding:0 6px;background:var(--red);color:#fff;font-family:var(--f-mono);font-size:.74rem;text-align:center}
+.pp{padding:24px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.grid-2:last-child{margin-bottom:0}
+.g-log{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+.grid-2>*,.evs>*,.loc-body>*,.pillars>*,.plans>*,.quotes>*,.sums>*,.kpis>*{min-width:0}
+.pp .card{padding:22px}
+.pp h4{font-size:1.15rem;margin-bottom:14px}
+.profile-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.dl{display:grid;gap:0;margin:0 0 20px;border:var(--bw) solid var(--ink)}
+.dl div{display:flex;justify-content:space-between;gap:14px;padding:10px 14px;border-bottom:1px solid var(--ink)}
+.dl div:last-child{border-bottom:0}
+.dl dt{color:var(--ink-2);font-size:.92rem}
+.dl dd{margin:0;font-weight:600;text-align:right}
+.mrow{margin-bottom:18px}
+.mrow-top{display:flex;justify-content:space-between;gap:12px;font-size:.93rem;margin-bottom:6px}
+.mrow-top b{font-variant-numeric:tabular-nums;font-weight:600}
+.meter{height:8px;background:var(--indigo-soft)}
+.meter i{display:block;height:100%;background:var(--indigo)}
+.meter.warn{background:#f8e2a6}.meter.warn i{background:#a86a00}
+.meter.bad{background:#f6c9c1}.meter.bad i{background:var(--red)}
+.note{font-size:.88rem;color:var(--ink-2)}
+.sums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.sum{background:var(--white);border:var(--bw) solid var(--ink);padding:16px 18px}
+.sum span{display:block;font-size:.88rem;color:var(--ink-2)}
+.sum b{display:block;font-family:var(--f-head);font-size:1.6rem;margin:2px 0;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.sum.bad b{color:var(--red)}
+.switch{display:flex;align-items:center;gap:10px;margin-top:6px}
+.sw{position:relative;width:52px;height:30px;background:var(--paper-2);border:var(--bw) solid var(--ink);cursor:pointer;padding:0;flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;background:var(--ink);transition:transform .15s}
+.sw[aria-checked="true"]{background:var(--green-soft)}
+.sw[aria-checked="true"]::after{transform:translateX(22px);background:var(--green)}
+.tbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{border:var(--bw) solid var(--ink);background:var(--white);padding:6px 14px;min-height:38px;font-weight:600;cursor:pointer}
+.filters button:hover{background:var(--gold-soft)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.scroll{position:relative;overflow-x:auto;border:var(--bw) solid var(--ink);background:var(--white)}
+.tbl{width:100%;border-collapse:collapse;min-width:640px}
+.tbl th{text-align:left;font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;padding:11px 14px;background:var(--paper-2);border-bottom:var(--bw) solid var(--ink);white-space:nowrap}
+.tbl td{padding:11px 14px;border-bottom:1px solid #c9c7b4;vertical-align:middle;font-size:.95rem}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr:hover{background:var(--gold-soft)}
+.tbl .r{text-align:right}
+.tbl .num{font-family:var(--f-mono);font-size:.88rem;white-space:nowrap}
+.empty{padding:28px;text-align:center;color:var(--ink-2)}
+.banner{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:14px 18px;border:var(--bw) solid var(--ink);margin-bottom:20px;font-weight:500}
+.banner.full{background:var(--green-soft)}
+.banner.restricted{background:var(--gold-soft)}
+.banner.frozen{background:var(--paper-2)}
+.banner .btn{margin-left:auto}
+.qr-card{text-align:center}
+.qr{width:190px;height:190px;margin:4px auto 14px;border:var(--bw) solid var(--ink);padding:6px;background:#fff}
+.qr svg{display:block;width:100%;height:100%}
+.qr-card .meter{max-width:190px;margin:8px auto 14px}
+.doors li,.devs li{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #c9c7b4}
+.doors li:last-child,.devs li:last-child{border-bottom:0}
+.doors b,.devs b{display:block}
+.doors small,.devs small{color:var(--ink-2);font-size:.86rem}
+.doors .btn,.devs .btn{white-space:nowrap;flex:none}
+.doors li>div,.devs li>div{min-width:0}
+.ops{margin-top:44px}
+.ops h3{font-size:1.2rem;margin-bottom:6px;color:#fff}
+.ops>p{color:#dfe0ff;font-size:.95rem;margin-bottom:18px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:var(--white);color:var(--ink);border:var(--bw) solid var(--ink);padding:18px 20px}
+.kpi span{display:block;font-size:.9rem;color:var(--ink-2)}
+.kpi b{display:block;font-family:var(--f-head);font-size:1.75rem;font-weight:600;letter-spacing:-.03em;margin:4px 0;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi small{font-family:var(--f-mono);font-size:.76rem;font-weight:500}
+.kpi .good{color:var(--green)}
+.kpi .badd{color:var(--red)}
+
+/* ===== komunitas ===== */
+.evs{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ev{display:flex;gap:18px;background:var(--white);border:var(--bw) solid var(--ink);padding:18px;align-items:center}
+.ev-date{flex:none;width:76px;text-align:center;border:var(--bw) solid var(--ink);background:var(--gold)}
+.ev-date b{display:block;font-family:var(--f-head);font-size:2rem;line-height:1.1}
+.ev-date span{display:block;font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;border-top:var(--bw) solid var(--ink);padding:3px 0;background:var(--white)}
+.ev h3{font-size:1.15rem;margin-bottom:4px}
+.ev p{font-size:.9rem;color:var(--ink-2)}
+.ev>div:nth-child(2){flex:1;min-width:0}
+.ev .btn{flex:none}
+.ev .btn[aria-pressed="true"]{background:var(--green-soft);color:var(--green)}
+
+/* ===== testimoni & faq ===== */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.quote{background:var(--white);border:var(--bw) solid var(--ink);padding:26px;display:flex;flex-direction:column;gap:20px}
+.quote:nth-child(2){transform:translateY(16px)}
+.quote p{font-family:var(--f-head);font-size:1.15rem;line-height:1.4;letter-spacing:-.01em}
+.quote footer{margin-top:auto;display:flex;gap:12px;align-items:center;font-size:.9rem;border:0;padding:0;background:none;color:var(--ink)}
+.quote footer small{display:block;color:var(--ink-2)}
+.quote .avatar{width:44px;height:44px;font-size:1rem}
+.faq{max-width:860px}
+.faq details{background:var(--white);border:var(--bw) solid var(--ink);margin-bottom:12px}
+.faq summary{list-style:none;cursor:pointer;padding:18px 22px;font-family:var(--f-head);font-weight:600;font-size:1.12rem;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.6rem;line-height:1;flex:none;transition:transform .2s}
+.faq details[open] summary{background:var(--gold)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:18px 22px;color:var(--ink-2)}
+
+/* ===== CTA & footer ===== */
+.cta{background:var(--ink);color:#fff;padding:88px 0;text-align:center;border-bottom:var(--bw) solid var(--ink)}
+.cta h2{font-size:clamp(2.2rem,5.4vw,4.2rem);letter-spacing:-.04em;max-width:16em;margin:0 auto 18px}
+.cta h2 em{font-style:normal;color:var(--gold)}
+.cta p{color:#cfd0ee;max-width:34em;margin:0 auto 32px;font-size:1.1rem}
+.cta .btn-row{justify-content:center}
+.cta .btn{box-shadow:4px 4px 0 var(--gold);border-color:var(--gold)}
+.cta .btn-gold{border-color:#fff}
+footer.site{background:var(--paper-2);padding:56px 0 28px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.foot h4{font-family:var(--f-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+.foot li{margin-bottom:8px;font-size:.95rem}
+.foot p{color:var(--ink-2);font-size:.95rem;margin-top:14px;max-width:26em}
+.foot a{text-underline-offset:3px}
+.legal{margin-top:40px;padding-top:18px;border-top:var(--bw) solid var(--ink);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-family:var(--f-mono);font-size:.76rem;color:var(--ink-2)}
+
+/* ===== dialog, form, toast ===== */
+dialog{border:var(--bw) solid var(--ink);box-shadow:8px 8px 0 var(--gold);padding:0;width:min(560px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;background:var(--white);color:var(--ink)}
+dialog::backdrop{background:rgba(16,20,66,.62)}
+.dlg-body{padding:26px}
+.dlg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}
+.dlg-head h3{font-size:1.5rem}
+.x{width:40px;height:40px;flex:none;background:var(--white);border:var(--bw) solid var(--ink);font-size:1.4rem;line-height:1;cursor:pointer}
+.x:hover{background:var(--gold)}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label,.field legend{font-weight:600;font-size:.93rem}
+.field input,.field select,.field textarea{width:100%;min-height:46px;padding:10px 12px;background:#fff;border:var(--bw) solid var(--ink);border-radius:0}
+.field textarea{min-height:84px;resize:vertical}
+.field.has-err input,.field.has-err select{border-color:var(--red);background:var(--red-soft)}
+.err-msg{color:var(--red);font-size:.86rem;font-weight:500;min-height:0}
+.err-msg:empty{display:none}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.demo-note{font-size:.85rem;color:var(--ink-2);margin:6px 0 18px}
+.methods{border:0;padding:0;margin:18px 0 0;display:grid;gap:10px}
+.methods legend{font-weight:600;font-size:.93rem;margin-bottom:8px;padding:0}
+.radio{display:flex;gap:12px;align-items:center;border:var(--bw) solid var(--ink);padding:12px 14px;cursor:pointer;background:#fff}
+.radio:has(input:checked){background:var(--gold-soft);box-shadow:3px 3px 0 var(--ink)}
+.radio input{width:20px;height:20px;accent-color:var(--indigo)}
+.radio small{display:block;color:var(--ink-2)}
+.pay-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid #c9c7b4;font-size:.95rem}
+.pay-total{display:flex;justify-content:space-between;padding:14px 0 0;font-family:var(--f-head);font-size:1.3rem;font-weight:700}
+.ok-box{text-align:center;padding:10px 0}
+.ok-box .tick{width:64px;height:64px;margin:0 auto 14px;background:var(--green-soft);border:var(--bw) solid var(--ink);display:grid;place-content:center;font-size:2rem;color:var(--green)}
+#toasts{position:fixed;right:18px;bottom:18px;z-index:200;display:grid;gap:10px;width:min(380px,calc(100vw - 36px));pointer-events:none}
+.toast{background:var(--ink);color:#fff;border:var(--bw) solid var(--gold);box-shadow:4px 4px 0 var(--gold);padding:12px 16px;font-size:.95rem;animation:tin .25s ease-out;pointer-events:auto}
+.toast.good{border-color:#7fe0b6;box-shadow:4px 4px 0 #7fe0b6}
+.toast.bad{border-color:#ff9a88;box-shadow:4px 4px 0 #ff9a88}
+.toast.out{opacity:0;transform:translateY(8px);transition:.3s}
+@keyframes tin{from{opacity:0;transform:translateY(10px)}}
+
+/* ===== responsif ===== */
+@media (max-width:1000px){
+  .burger{display:block}
+  .nav-cta{margin-left:0}
+  #menu{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--paper);border-bottom:var(--bw) solid var(--ink);padding:10px 20px 18px;margin:0}
+  .nav.open #menu{display:flex}
+  #menu a{padding:12px;border-color:var(--ink);background:var(--white);margin-top:8px}
+  .nav-in{gap:10px}
+  .nav-cta{margin-left:auto}
+  .burger{margin-left:0}
+  .hero-grid{grid-template-columns:1fr;gap:64px}
+  .hero-art{max-width:480px;margin:0 auto;width:100%}
+  .loc{grid-template-columns:1fr}
+  .loc-tabs{grid-template-columns:repeat(3,1fr)}
+  .pillars,.plans,.quotes{grid-template-columns:1fr}
+  .quote:nth-child(2){transform:none}
+  .grid-2,.evs,.g-log,.loc-body{grid-template-columns:minmax(0,1fr)}
+  .kpis{grid-template-columns:1fr 1fr}
+  .foot{grid-template-columns:1fr 1fr}
+  .stats-in{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(-n+2){border-bottom:var(--bw) solid var(--ink)}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .sec{padding:68px 0}
+  .hero{padding:36px 0 56px}
+  .loc-art{aspect-ratio:16/9}
+  .loc-body{padding:20px}
+  .ptabs button{flex:1 1 0;padding:13px 8px;font-size:.92rem}
+  .ptabs .cnt{margin-left:4px;min-width:20px}
+  .loc-tabs{grid-template-columns:1fr}
+  .loc-tab{flex-direction:row;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .sums{grid-template-columns:1fr}
+  .pass{left:8px;bottom:24px;width:206px}
+  .sticker{right:6px;top:-22px;width:92px;height:92px}
+  .sticker b{font-size:1.6rem}
+  .float-inv{right:6px}
+  .art{box-shadow:6px 6px 0 var(--ink)}
+  .win{box-shadow:6px 6px 0 var(--gold)}
+  .win-bar .win-title{font-size:.7rem}
+  .win-head .chips{margin-left:0}
+  .pp{padding:16px}
+  .ev{flex-wrap:wrap}
+  .ev .btn{width:100%}
+  .f2{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+  .kpis{grid-template-columns:1fr}
+  .banner .btn{margin-left:0}
+  .dlg-body{padding:20px}
+}
+@media (max-width:520px){
+  .ctrl{width:100%}
+  .seg{display:flex;width:100%}
+  .seg button{flex:1 1 auto;min-width:0;padding:9px 8px;font-size:.92rem;line-height:1.25}
+}
+@media (max-width:420px){
+  .logo span{font-size:1.1rem}
+  .nav-cta{padding:8px 14px}
+  .stat{padding:20px 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .marquee{white-space:normal}
+  .marquee-track{flex-wrap:wrap}
+  .marquee-track>div+div{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#utama">Lompat ke konten utama</a>
+<div class="demo-bar">Demo tampilan — merek, harga, dan data hanya contoh. Tidak ada data yang dikirim ke mana pun.</div>
+
+<header class="nav" id="top">
+  <div class="wrap nav-in">
+    <a class="logo" href="#beranda" aria-label="Sinyal Sawah, ke bagian atas">
+      <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="#101442"/><path d="M7 27h6v-6H7zm9 0h6V15h-6zm9 0h6V7h-6z" fill="#ffb81c"/></svg>
+      <span>Sinyal<b>Sawah</b></span>
+    </a>
+    <nav id="menu" aria-label="Menu utama">
+      <a href="#lokasi">Lokasi</a>
+      <a href="#sistem">Sistem</a>
+      <a href="#paket">Paket</a>
+      <a href="#portal">Portal anggota</a>
+      <a href="#komunitas">Komunitas</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="btn btn-gold btn-sm nav-cta" type="button" data-open="join">Gabung</button>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Buka menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="utama">
+  <!-- HERO -->
+  <section class="hero" id="beranda">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow"><span class="dot"></span> Coworking + Co-living · Ubud · Canggu · Tabanan</p>
+        <h1>Kerja dari <mark>sawah</mark>.<br>Sinyal tetap <span class="u">penuh</span>.</h1>
+        <p class="lead">Meja kerja, kamar tinggal, tagihan bulanan, dan kunci pintu — semuanya terurus dalam satu keanggotaan. Datang bawa laptop, sisanya kami siapkan.</p>
+        <div class="btn-row">
+          <a class="btn btn-gold" href="#paket">Lihat paket</a>
+          <button class="btn" type="button" data-open="join" data-mode="visit">Jadwalkan kunjungan</button>
+        </div>
+        <ul class="hero-points">
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" fill="#ffb81c" stroke="#101442" stroke-width="2"/><path d="M6 11.5l3.5 3.5L16 7.5" fill="none" stroke="#101442" stroke-width="2.4"/></svg>Wi-Fi serat optik 300 Mbps dengan jalur cadangan 4G</li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" fill="#ffb81c" stroke="#101442" stroke-width="2"/><path d="M6 11.5l3.5 3.5L16 7.5" fill="none" stroke="#101442" stroke-width="2.4"/></svg>Akses 24 jam lewat QR dinamis, kartu, atau Bluetooth</li>
+          <li><svg viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" fill="#ffb81c" stroke="#101442" stroke-width="2"/><path d="M6 11.5l3.5 3.5L16 7.5" fill="none" stroke="#101442" stroke-width="2.4"/></svg>Satu tagihan bulanan untuk meja, kamar, dan add-on</li>
+        </ul>
+      </div>
+      <div class="hero-art">
+        <div class="art">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustrasi terasering sawah di pagi hari dengan menara sinyal kecil di atas bukit">
+            <rect width="400" height="500" fill="#ffe29a"/>
+            <circle cx="300" cy="128" r="62" fill="#ffb81c" stroke="#101442" stroke-width="3"/>
+            <path d="M0 232 C80 190 160 218 240 200 S360 190 400 216 V500 H0Z" fill="#5fb88a" stroke="#101442" stroke-width="2.5"/>
+            <g fill="none" stroke="#101442" stroke-width="3" stroke-linecap="round">
+              <path d="M95 152 V216"/>
+              <path d="M85.1 142.1 A14 14 0 0 1 104.9 142.1"/>
+              <path d="M76.6 133.6 A26 26 0 0 1 113.4 133.6"/>
+              <path d="M68.1 125.1 A38 38 0 0 1 121.9 125.1"/>
+            </g>
+            <circle cx="95" cy="152" r="5" fill="#101442"/>
+            <g stroke="#101442" stroke-width="2.5">
+              <path d="M0 262 C70 242 150 276 230 256 S350 244 400 262 V500 H0Z" fill="#8bd17c"/>
+              <path d="M0 306 C90 286 170 322 260 300 S370 292 400 306 V500 H0Z" fill="#2fae74"/>
+              <path d="M0 350 C80 330 180 366 270 344 S360 338 400 352 V500 H0Z" fill="#c9e88f"/>
+              <path d="M0 394 C100 372 170 410 260 390 S360 384 400 396 V500 H0Z" fill="#17795a"/>
+              <path d="M0 438 C80 420 170 452 270 434 S360 428 400 440 V500 H0Z" fill="#8bd17c"/>
+              <path d="M0 476 C90 462 180 490 270 474 S360 470 400 478 V500 H0Z" fill="#2fae74"/>
+            </g>
+            <path d="M332 304 q-5 -40 4 -72" fill="none" stroke="#101442" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M336 232 q-26 -22 -52 -4 M336 232 q-8 -30 -34 -38 M336 232 q18 -28 48 -24 M336 232 q30 -4 46 20" fill="none" stroke="#17795a" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="sticker" aria-hidden="true"><div><b>300</b><small>Mbps<br>serat optik</small></div></div>
+        <div class="pass">
+          <div class="pass-top"><span>Kartu anggota</span><span>SSW</span></div>
+          <div class="pass-body">
+            <div class="pass-qr" id="hero-qr"></div>
+            <div><b>Nadia P.</b><small>Dedicated Desk · Ubud</small><span class="chip chip-ok">Akses aktif</span></div>
+          </div>
+        </div>
+        <div class="float-inv" aria-hidden="true">INV-2026-1001 <i>LUNAS</i></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <div><span>Wi-Fi 300 Mbps</span><span>Listrik cadangan</span><span>Akses 24 jam</span><span>Kopi tanpa batas</span><span>Phone booth</span><span>Ruang meeting</span><span>Yoga subuh</span><span>Dapur bersama</span></div>
+      <div><span>Wi-Fi 300 Mbps</span><span>Listrik cadangan</span><span>Akses 24 jam</span><span>Kopi tanpa batas</span><span>Phone booth</span><span>Ruang meeting</span><span>Yoga subuh</span><span>Dapur bersama</span></div>
+    </div>
+  </div>
+
+  <section class="stats" aria-label="Angka singkat">
+    <div class="wrap stats-in" style="padding:0">
+      <div class="stat"><b>232</b><span>meja kerja di tiga lokasi</span></div>
+      <div class="stat"><b>64</b><span>kamar co-living siap huni</span></div>
+      <div class="stat"><b>300 Mbps</b><span>Wi-Fi serat optik + cadangan 4G</span></div>
+      <div class="stat"><b>+15%</b><span>perkiraan pertumbuhan hub nomad di Ubud, Canggu &amp; Tabanan</span><i>perkiraan, angka contoh</i></div>
+    </div>
+  </section>
+
+  <!-- LOKASI -->
+  <section class="sec" id="lokasi">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">01 — Lokasi</p>
+        <h2>Tiga hub, tiga suasana. Satu keanggotaan.</h2>
+        <p>Pilih tempat yang cocok dengan ritme kerja Anda. Anggota Dedicated Desk ke atas boleh berkunjung ke hub lain tanpa biaya tambahan.</p>
+      </div>
+      <div class="loc">
+        <div class="loc-tabs" role="tablist" aria-label="Pilih lokasi" id="loc-tabs">
+          <button class="loc-tab" role="tab" type="button" id="lt-ubud" aria-controls="loc-panel" data-tab="ubud"><b>Ubud</b><small>Tenang &amp; hijau</small></button>
+          <button class="loc-tab" role="tab" type="button" id="lt-canggu" aria-controls="loc-panel" data-tab="canggu"><b>Canggu</b><small>Cepat &amp; ramai</small></button>
+          <button class="loc-tab" role="tab" type="button" id="lt-tabanan" aria-controls="loc-panel" data-tab="tabanan"><b>Tabanan</b><small>Lapang &amp; hemat</small></button>
+        </div>
+        <div id="loc-panel" role="tabpanel" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SISTEM -->
+  <section class="sec sec-alt" id="sistem">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">02 — Sistem di balik layar</p>
+        <h2>Tiga hal yang bikin komunitas berjalan rapi.</h2>
+        <p>Keanggotaan, tagihan bulanan, dan akses pintu terhubung satu sama lain. Anggota tenang, tim pengelola tidak perlu mengejar-ngejar bukti transfer.</p>
+      </div>
+      <div class="pillars">
+        <article class="pillar">
+          <span class="no">01 / KEANGGOTAAN</span>
+          <svg class="ic" viewBox="0 0 52 52" aria-hidden="true"><rect x="3" y="9" width="46" height="34" fill="#ffb81c" stroke="#101442" stroke-width="2.5"/><circle cx="17" cy="24" r="6" fill="#fff" stroke="#101442" stroke-width="2.5"/><path d="M8 40c1-8 17-8 18 0" fill="#fff" stroke="#101442" stroke-width="2.5"/><path d="M31 21h12M31 29h9" stroke="#101442" stroke-width="2.5"/></svg>
+          <h3>Satu profil untuk semuanya</h3>
+          <p>Daftar sekali, pilih paket dan lokasi, lalu kelola sendiri dari portal.</p>
+          <ul>
+            <li>Daftar online kurang dari 3 menit, tanpa berkas cetak</li>
+            <li>Ganti paket, perpanjang kontrak, atau bekukan keanggotaan</li>
+            <li>Kuota ruang meeting, tamu, dan cetak terlihat langsung</li>
+          </ul>
+          <a href="#portal" data-portal-tab="anggota">Lihat di portal →</a>
+        </article>
+        <article class="pillar">
+          <span class="no">02 / TAGIHAN BULANAN</span>
+          <svg class="ic" viewBox="0 0 52 52" aria-hidden="true"><path d="M10 4h32v44l-5-4-5 4-6-4-6 4-5-4-5 4z" fill="#fff" stroke="#101442" stroke-width="2.5"/><path d="M17 15h18M17 23h18M17 31h10" stroke="#101442" stroke-width="2.5"/><rect x="29" y="28" width="9" height="9" fill="#ffb81c" stroke="#101442" stroke-width="2"/></svg>
+          <h3>Satu tagihan, tanggal jelas</h3>
+          <p>Invoice terbit otomatis setiap tanggal 1 dan jatuh tempo tanggal 10.</p>
+          <ul>
+            <li>Bayar lewat QRIS, virtual account, atau kartu</li>
+            <li>Pengingat otomatis lewat WhatsApp dan email</li>
+            <li>Add-on loker, parkir, dan meeting ikut di tagihan yang sama</li>
+          </ul>
+          <a href="#portal" data-portal-tab="tagihan">Lihat di portal →</a>
+        </article>
+        <article class="pillar">
+          <span class="no">03 / AKSES</span>
+          <svg class="ic" viewBox="0 0 52 52" aria-hidden="true"><rect x="12" y="22" width="28" height="24" fill="#ffb81c" stroke="#101442" stroke-width="2.5"/><path d="M17 22v-7a9 9 0 0 1 18 0v7" fill="none" stroke="#101442" stroke-width="2.5"/><circle cx="26" cy="33" r="3.5" fill="#101442"/><path d="M26 35v6" stroke="#101442" stroke-width="2.5"/></svg>
+          <h3>Pintu yang tahu siapa Anda</h3>
+          <p>Izin masuk mengikuti paket dan status tagihan, tanpa kunci fisik.</p>
+          <ul>
+            <li>QR dinamis, kartu RFID, atau Bluetooth dari ponsel</li>
+            <li>Riwayat keluar-masuk per pintu, per anggota</li>
+            <li>Kartu atau ponsel hilang? Cabut aksesnya dalam sekali klik</li>
+          </ul>
+          <a href="#portal" data-portal-tab="akses">Lihat di portal →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAKET -->
+  <section class="sec" id="paket">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">03 — Paket &amp; harga</p>
+        <h2>Bayar bulanan, berhenti kapan perlu.</h2>
+        <p>Harga contoh per bulan, sudah termasuk pajak. Ganti lokasi atau jenis paket untuk melihat harga yang berubah.</p>
+      </div>
+      <div class="ctrls">
+        <div class="ctrl"><span id="c1">Jenis</span>
+          <div class="seg" role="group" aria-labelledby="c1" id="seg-type">
+            <button type="button" data-type="cowork" aria-pressed="true">Coworking</button>
+            <button type="button" data-type="coliving" aria-pressed="false">Co-living</button>
+          </div></div>
+        <div class="ctrl"><span id="c2">Lokasi</span>
+          <div class="seg" role="group" aria-labelledby="c2" id="seg-city">
+            <button type="button" data-city="ubud" aria-pressed="true">Ubud</button>
+            <button type="button" data-city="canggu" aria-pressed="false">Canggu</button>
+            <button type="button" data-city="tabanan" aria-pressed="false">Tabanan</button>
+          </div></div>
+        <div class="ctrl"><span id="c3">Kontrak</span>
+          <div class="seg" role="group" aria-labelledby="c3" id="seg-term">
+            <button type="button" data-term="1" aria-pressed="true">Bulan ke bulan</button>
+            <button type="button" data-term="6" aria-pressed="false">6 bulan · hemat 10%</button>
+          </div></div>
+      </div>
+      <div class="plans" id="plans" aria-live="polite"></div>
+      <div class="daypass">
+        <p id="daypass-text"></p>
+        <button class="btn btn-sm" type="button" data-open="join" data-mode="visit" data-plan="Day Pass">Beli day pass</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAL -->
+  <section class="sec sec-dark" id="portal">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">04 — Portal anggota · demo interaktif</p>
+        <h2>Coba sendiri: keanggotaan, tagihan, dan akses dalam satu layar.</h2>
+        <p>Semua tombol di bawah bisa diklik. Coba bayar tagihan yang terlambat di tab Tagihan, lalu buka tab Akses dan lihat ruang meeting terbuka lagi.</p>
+      </div>
+      <div class="win" id="portal-app">
+        <div class="win-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="win-title">Portal Anggota — Sinyal Sawah Ubud</span><span class="win-date">Tanggal demo: 13 Nov 2026</span></div>
+        <div class="win-head" id="win-head"></div>
+        <div class="ptabs" role="tablist" aria-label="Bagian portal" id="ptabs">
+          <button type="button" role="tab" id="pt-anggota" aria-controls="pp-anggota" data-tab="anggota">Keanggotaan</button>
+          <button type="button" role="tab" id="pt-tagihan" aria-controls="pp-tagihan" data-tab="tagihan">Tagihan <span class="cnt" id="cnt-unpaid" hidden></span></button>
+          <button type="button" role="tab" id="pt-akses" aria-controls="pp-akses" data-tab="akses">Akses</button>
+        </div>
+        <div class="pp" role="tabpanel" id="pp-anggota" aria-labelledby="pt-anggota"></div>
+        <div class="pp" role="tabpanel" id="pp-tagihan" aria-labelledby="pt-tagihan" hidden></div>
+        <div class="pp" role="tabpanel" id="pp-akses" aria-labelledby="pt-akses" hidden></div>
+      </div>
+
+      <div class="ops">
+        <h3>Sisi pengelola: ringkasan bulan ini</h3>
+        <p>Yang dilihat tim Sinyal Sawah di semua lokasi. Selisih dibandingkan Oktober 2026.</p>
+        <div class="kpis">
+          <div class="kpi"><span>Anggota aktif</span><b>187</b><small class="good">▲ 9 anggota vs Okt</small></div>
+          <div class="kpi"><span>Tagihan terbit bulan ini</span><b>Rp&nbsp;412.650.000</b><small class="good">▲ 4,5% vs Okt</small></div>
+          <div class="kpi"><span>Sudah terbayar</span><b>91%</b><small class="badd">▼ 2 poin vs Okt</small></div>
+          <div class="kpi"><span>Terlambat bayar</span><b>9 anggota</b><small class="badd">▲ 3 anggota vs Okt</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOMUNITAS -->
+  <section class="sec" id="komunitas">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">05 — Komunitas</p>
+        <h2>Kerja sendirian, tapi tidak kesepian.</h2>
+        <p>Acara rutin untuk anggota dan tamu. Daftar dulu agar tempat duduk dan konsumsinya cukup.</p>
+      </div>
+      <div class="ctrls">
+        <div class="ctrl"><span id="c4">Tampilkan acara di</span>
+          <div class="seg" role="group" aria-labelledby="c4" id="seg-ev">
+            <button type="button" data-ev="all" aria-pressed="true">Semua</button>
+            <button type="button" data-ev="ubud" aria-pressed="false">Ubud</button>
+            <button type="button" data-ev="canggu" aria-pressed="false">Canggu</button>
+            <button type="button" data-ev="tabanan" aria-pressed="false">Tabanan</button>
+          </div></div>
+      </div>
+      <div class="evs" id="evs"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI -->
+  <section class="sec sec-alt" id="testimoni">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">06 — Kata anggota</p>
+        <h2>Yang sudah merasakan.</h2>
+        <p>Testimoni contoh (tokoh fiktif) untuk keperluan demo tampilan.</p>
+      </div>
+      <div class="quotes">
+        <figure class="quote" style="margin:0">
+          <p>“Dulu tiap bulan saya transfer ke empat tempat berbeda. Sekarang satu tagihan, bayar lewat QRIS, selesai.”</p>
+          <footer><span class="avatar" aria-hidden="true">RW</span><div>Rangga Wiratama<small>Pengembang perangkat lunak lepas · Canggu</small></div></footer>
+        </figure>
+        <figure class="quote" style="margin:0">
+          <p>“Kunci digitalnya enak. Pulang larut dari sesi matahari terbenam, tinggal buka ponsel, tidak perlu bangunkan petugas.”</p>
+          <footer><span class="avatar" aria-hidden="true">SA</span><div>Ni Luh Sekar Ayu<small>Ilustrator · Ubud</small></div></footer>
+        </figure>
+        <figure class="quote" style="margin:0">
+          <p>“Tabanan itu tersembunyi. Sawah di depan meja, internet tidak pernah putus, dan harganya masuk akal.”</p>
+          <footer><span class="avatar" aria-hidden="true">MV</span><div>Marlene Voss<small>Penulis konten · Tabanan</small></div></footer>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">07 — Pertanyaan umum</p>
+        <h2>Sebelum Anda bertanya.</h2>
+      </div>
+      <div class="faq">
+        <details open><summary>Berapa lama minimal berlangganan?</summary><p>Coworking bisa bulan ke bulan. Co-living minimal satu bulan. Kontrak 6 bulan mendapat potongan 10% dari harga bulanan, dan tagihannya tetap datang setiap bulan.</p></details>
+        <details><summary>Bagaimana tagihan bulanan dihitung?</summary><p>Invoice terbit otomatis setiap tanggal 1 dan jatuh tempo tanggal 10. Add-on seperti locker, parkir, dan jam meeting tambahan masuk ke tagihan yang sama. Bulan pertama dihitung proporsional sesuai tanggal masuk.</p></details>
+        <details><summary>Apa yang terjadi kalau saya terlambat membayar?</summary><p>Anda menerima pengingat tiga hari sebelum dan sehari setelah jatuh tempo. Jika tetap belum lunas, akses ruang meeting dibatasi sampai pembayaran masuk. Pintu utama dan meja kerja tetap bisa dipakai. Coba sendiri alurnya di Portal anggota di atas.</p></details>
+        <details><summary>Apakah saya bisa bekerja di luar jam kantor?</summary><p>Anggota Dedicated Desk, Private Office, dan semua penghuni co-living punya akses 24 jam. Hot Desk berlaku pukul 07.00–22.00. Semua lokasi punya listrik cadangan dan jalur internet kedua.</p></details>
+        <details><summary>Boleh membawa tamu?</summary><p>Boleh, sesuai kuota paket. Tamu didaftarkan lewat portal dan mendapat QR sekali pakai yang berlaku pada hari kunjungan.</p></details>
+        <details><summary>Bagaimana kalau kartu atau ponsel saya hilang?</summary><p>Buka tab Akses di portal, lalu cabut perangkat yang hilang. Akses perangkat itu langsung mati dan Anda bisa mendaftarkan perangkat baru di resepsi.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="gabung">
+    <div class="wrap">
+      <h2>Meja Anda <em>sudah menunggu</em> di antara petak sawah.</h2>
+      <p>Mampir dulu untuk melihat ruangannya, atau langsung daftar dan mulai minggu depan.</p>
+      <div class="btn-row">
+        <button class="btn btn-gold" type="button" data-open="join">Gabung sekarang</button>
+        <button class="btn" type="button" data-open="join" data-mode="visit">Jadwalkan kunjungan</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#beranda" aria-label="Sinyal Sawah, ke bagian atas">
+          <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" fill="#101442"/><path d="M7 27h6v-6H7zm9 0h6V15h-6zm9 0h6V7h-6z" fill="#ffb81c"/></svg>
+          <span>Sinyal<b>Sawah</b></span>
+        </a>
+        <p>Coworking dan co-living untuk nomad digital dan pekerja jarak jauh di Bali.</p>
+      </div>
+      <div>
+        <h4>Lokasi</h4>
+        <ul>
+          <li>Ubud — Jl. Subak Mekar No. 12, Gianyar</li>
+          <li>Canggu — Gg. Kenari No. 7, Badung</li>
+          <li>Tabanan — Jl. Pematang Padi No. 3, Kediri</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Jelajah</h4>
+        <ul>
+          <li><a href="#paket">Paket &amp; harga</a></li>
+          <li><a href="#portal">Portal anggota</a></li>
+          <li><a href="#komunitas">Acara komunitas</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hubungi</h4>
+        <ul>
+          <li>halo@sinyalsawah.example</li>
+          <li>0361-555-0100</li>
+          <li>Resepsi 08.00–20.00 WITA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal"><span>© 2026 Sinyal Sawah — merek fiktif untuk demo tampilan.</span><span>Data, harga, dan testimoni hanya contoh.</span></div>
+  </div>
+</footer>
+
+<!-- DIALOG: GABUNG / KUNJUNGAN -->
+<dialog id="dlg-join" aria-labelledby="join-title">
+  <div class="dlg-body">
+    <div class="dlg-head"><h3 id="join-title">Gabung Sinyal Sawah</h3><button type="button" class="x" data-close aria-label="Tutup">×</button></div>
+    <form id="join-form" novalidate>
+      <p class="demo-note">Formulir tiruan: isian tidak dikirim ke mana pun.</p>
+      <div class="field"><label for="j-nama">Nama lengkap</label><input id="j-nama" name="nama" autocomplete="name" placeholder="mis. Putu Ananda"><p class="err-msg" role="alert"></p></div>
+      <div class="f2">
+        <div class="field"><label for="j-email">Email</label><input id="j-email" name="email" type="email" autocomplete="email" placeholder="nama@email.com"><p class="err-msg" role="alert"></p></div>
+        <div class="field"><label for="j-wa">WhatsApp</label><input id="j-wa" name="wa" type="tel" autocomplete="tel" placeholder="0812 3456 7890"><p class="err-msg" role="alert"></p></div>
+      </div>
+      <div class="f2">
+        <div class="field"><label for="j-lokasi">Lokasi</label><select id="j-lokasi" name="lokasi"><option value="ubud">Ubud</option><option value="canggu">Canggu</option><option value="tabanan">Tabanan</option></select></div>
+        <div class="field"><label for="j-paket">Paket</label><select id="j-paket" name="paket">
+          <option>Belum tahu — mau lihat dulu</option><option>Day Pass</option><option>Hot Desk</option><option>Dedicated Desk</option><option>Private Office</option><option>Kamar Berbagi</option><option>Kamar Privat</option><option>Studio Sawah</option></select></div>
+      </div>
+      <div class="field"><label for="j-tgl" id="j-tgl-label">Tanggal mulai</label><input id="j-tgl" name="tgl" type="date" min="2026-11-13"><p class="err-msg" role="alert"></p></div>
+      <div class="field"><label for="j-catatan">Catatan (opsional)</label><textarea id="j-catatan" name="catatan" placeholder="Kebutuhan khusus, jumlah orang, dan sebagainya"></textarea></div>
+      <div class="btn-row"><button class="btn btn-gold" type="submit" id="j-submit">Kirim permintaan</button><button class="btn" type="button" data-close>Batal</button></div>
+    </form>
+    <div class="ok-box" id="join-ok" hidden>
+      <div class="tick" aria-hidden="true">✓</div>
+      <h3>Permintaan diterima</h3>
+      <p id="join-ok-text" style="margin:10px 0 6px"></p>
+      <p class="note">Ini demo: tidak ada data yang dikirim atau disimpan.</p>
+      <div class="btn-row" style="justify-content:center;margin-top:18px"><button class="btn btn-gold" type="button" data-close>Tutup</button></div>
+    </div>
+  </div>
+</dialog>
+
+<!-- DIALOG: BAYAR -->
+<dialog id="dlg-pay" aria-labelledby="pay-title">
+  <div class="dlg-body">
+    <div class="dlg-head"><h3 id="pay-title">Bayar tagihan</h3><button type="button" class="x" data-close aria-label="Tutup">×</button></div>
+    <div id="pay-list"></div>
+    <fieldset class="methods">
+      <legend>Metode pembayaran</legend>
+      <label class="radio"><input type="radio" name="pm" value="QRIS" checked><span><b>QRIS</b><small>Semua dompet digital dan m-banking</small></span></label>
+      <label class="radio"><input type="radio" name="pm" value="virtual account"><span><b>Virtual account</b><small>Transfer dari ATM atau m-banking</small></span></label>
+      <label class="radio"><input type="radio" name="pm" value="kartu"><span><b>Kartu kredit / debit</b><small>Visa dan Mastercard</small></span></label>
+    </fieldset>
+    <p class="demo-note" style="margin-top:14px">Demo: tidak ada uang yang diproses.</p>
+    <div class="btn-row"><button class="btn btn-gold" type="button" id="pay-go">Bayar sekarang</button><button class="btn" type="button" data-close>Batal</button></div>
+  </div>
+</dialog>
+
+<!-- DIALOG: KONFIRMASI -->
+<dialog id="dlg-confirm" aria-labelledby="cf-title">
+  <div class="dlg-body">
+    <div class="dlg-head"><h3 id="cf-title"></h3><button type="button" class="x" data-close aria-label="Tutup">×</button></div>
+    <p id="cf-body"></p>
+    <div id="cf-extra" style="margin-top:14px"></div>
+    <div class="btn-row" style="margin-top:22px"><button class="btn btn-gold" type="button" id="cf-ok">Ya, lanjutkan</button><button class="btn" type="button" data-close>Batal</button></div>
+  </div>
+</dialog>
+
+<div id="toasts" role="status" aria-live="polite"></div>
+<noscript><p style="padding:16px;text-align:center;background:#ffb81c">Aktifkan JavaScript untuk mencoba bagian interaktif demo ini.</p></noscript>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var TODAY='2026-11-13';
+var BLN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+function fmtDate(iso){var p=iso.split('-');return (+p[2])+' '+BLN[+p[1]-1]+' '+p[0];}
+function rp(n){return 'Rp '+Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function scrollTo(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+
+/* ===== toast ===== */
+var toastBox=$('#toasts');
+function toast(msg,type){
+  var t=document.createElement('div');t.className='toast'+(type?' '+type:'');t.textContent=msg;toastBox.appendChild(t);
+  setTimeout(function(){t.classList.add('out');setTimeout(function(){t.remove();},320);},4000);
+}
+
+/* ===== dialog ===== */
+function openDlg(id){var d=document.getElementById(id);if(!d)return;if(typeof d.showModal==='function'){if(!d.open)d.showModal();}else d.setAttribute('open','');}
+function closeDlg(d){if(typeof d.close==='function'){if(d.open)d.close();}else d.removeAttribute('open');}
+$$('dialog').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)closeDlg(d);});});
+$$('[data-close]').forEach(function(b){b.addEventListener('click',function(){closeDlg(b.closest('dialog'));});});
+
+/* ===== QR tiruan (bukan kode QR sungguhan) ===== */
+function rng(seed){
+  var h=1779033703^seed.length,i;
+  for(i=0;i<seed.length;i++){h=Math.imul(h^seed.charCodeAt(i),3432918353);h=h<<13|h>>>19;}
+  return function(){h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);h^=h>>>16;return (h>>>0)/4294967296;};
+}
+function qrSvg(seed,label){
+  var n=25,r=rng(seed),s='',x,y;
+  function finder(x,y){return (x<8&&y<8)||(x>=n-8&&y<8)||(x<8&&y>=n-8);}
+  for(y=0;y<n;y++)for(x=0;x<n;x++){if(finder(x,y))continue;if(r()>0.52)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1"/>';}
+  function fp(x,y){return '<rect x="'+x+'" y="'+y+'" width="7" height="7"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3"/>';}
+  return '<svg viewBox="-1 -1 '+(n+2)+' '+(n+2)+'" role="img" aria-label="'+esc(label)+'" shape-rendering="crispEdges"><rect x="-1" y="-1" width="'+(n+2)+'" height="'+(n+2)+'" fill="#fff"/><g fill="#101442">'+s+fp(0,0)+fp(n-7,0)+fp(0,n-7)+'</g></svg>';
+}
+$('#hero-qr').innerHTML=qrSvg('SSW-0217-hero','Contoh kode QR kartu anggota');
+
+/* ===== tab generik ===== */
+function initTabs(list,opts){
+  opts=opts||{};
+  var tabs=$$('[role="tab"]',list);
+  function setSel(t){
+    tabs.forEach(function(x){
+      var on=x===t;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;
+      if(!opts.shared){var p=document.getElementById(x.getAttribute('aria-controls'));if(p)p.hidden=!on;}
+    });
+    if(opts.shared){var pn=document.getElementById(t.getAttribute('aria-controls'));if(pn)pn.setAttribute('aria-labelledby',t.id);}
+  }
+  function pick(t,focus){setSel(t);if(focus)t.focus();if(opts.onSelect)opts.onSelect(t.dataset.tab);}
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){pick(t);});
+    t.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight'||e.key==='ArrowDown')n=tabs[(i+1)%tabs.length];
+      else if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=tabs[(i-1+tabs.length)%tabs.length];
+      else if(e.key==='Home')n=tabs[0];else if(e.key==='End')n=tabs[tabs.length-1];
+      if(n){e.preventDefault();pick(n,true);}
+    });
+  });
+  return {show:function(id){var t=tabs.filter(function(x){return x.dataset.tab===id;})[0];if(t)setSel(t);}};
+}
+
+/* ===== navigasi ===== */
+var nav=$('#top'),burger=$('.burger');
+function setMenu(open){nav.classList.toggle('open',open);burger.setAttribute('aria-expanded',open?'true':'false');burger.setAttribute('aria-label',open?'Tutup menu':'Buka menu');}
+burger.addEventListener('click',function(){setMenu(!nav.classList.contains('open'));});
+$$('#menu a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false);});
+(function(){
+  var links=$$('#menu a');
+  if(!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){
+    if(!en.isIntersecting)return;
+    links.forEach(function(l){l.removeAttribute('aria-current');});
+    var l=links.filter(function(x){return x.getAttribute('href')==='#'+en.target.id;})[0];
+    if(l)l.setAttribute('aria-current','true');
+  });},{rootMargin:'-45% 0px -50% 0px'});
+  links.forEach(function(a){var s=$(a.getAttribute('href'));if(s)io.observe(s);});
+})();
+
+/* ===== data lokasi & paket ===== */
+var CITIES={
+  ubud:{name:'Ubud',kab:'Kabupaten Gianyar',mult:1,tag:'Tenang, hijau, penuh kreator.',
+    desc:'Hub tertua kami, dikelilingi petak sawah dan studio seniman. Cocok untuk penulis, desainer, dan siapa pun yang butuh fokus panjang.',
+    desk:64,rooms:18,occ:82,addr:'Jl. Subak Mekar No. 12, Ubud, Gianyar',
+    feat:['Yoga deck','Studio podcast','Taman kopi','Dapur komunal'],
+    art:'<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMin slice" role="img" aria-label="Ilustrasi terasering dan pohon kelapa di Ubud"><rect width="320" height="200" fill="#d6efe2"/><circle cx="250" cy="48" r="26" fill="#ffb81c" stroke="#101442" stroke-width="2.5"/><path d="M0 100 C60 80 120 108 190 92 S290 84 320 98 V200 H0Z" fill="#8bd17c" stroke="#101442" stroke-width="2.5"/><path d="M0 134 C70 116 130 144 200 128 S290 120 320 132 V200 H0Z" fill="#2fae74" stroke="#101442" stroke-width="2.5"/><path d="M0 168 C80 152 140 178 210 164 S290 158 320 166 V200 H0Z" fill="#17795a" stroke="#101442" stroke-width="2.5"/><path d="M70 100 q-3 -34 4 -56" fill="none" stroke="#101442" stroke-width="3"/><path d="M74 44 q-22 -16 -40 -2 M74 44 q-6 -24 -28 -28 M74 44 q14 -22 38 -16 M74 44 q24 0 36 16" fill="none" stroke="#17795a" stroke-width="4" stroke-linecap="round"/></svg>'},
+  canggu:{name:'Canggu',kab:'Kabupaten Badung',mult:1.1,tag:'Cepat, ramai, dekat pantai.',
+    desc:'Hub terbesar dengan komunitas startup dan pengembang. Banyak acara, banyak kenalan, dan pantai hanya sepuluh menit naik motor.',
+    desk:120,rooms:32,occ:91,addr:'Gang Kenari No. 7, Canggu, Badung',
+    feat:['12 phone booth','Rooftop acara','Loker papan selancar','Parkir motor luas'],
+    art:'<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMin slice" role="img" aria-label="Ilustrasi matahari terbenam di atas laut Canggu"><rect width="320" height="200" fill="#fff0c2"/><circle cx="160" cy="96" r="42" fill="#ffb81c" stroke="#101442" stroke-width="2.5"/><rect y="104" width="320" height="96" fill="#2e35d6" stroke="#101442" stroke-width="2.5"/><path d="M0 128 q20 -12 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fffdf7" stroke-width="3"/><path d="M0 158 q20 -12 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fffdf7" stroke-width="3"/><ellipse cx="258" cy="152" rx="9" ry="34" transform="rotate(25 258 152)" fill="#ffb81c" stroke="#101442" stroke-width="2.5"/></svg>'},
+  tabanan:{name:'Tabanan',kab:'Kabupaten Tabanan',mult:.85,tag:'Lapang, sejuk, harga bersahabat.',
+    desc:'Hub terbaru di kaki Gunung Batukaru. Ruangnya lega, udaranya sejuk, dan hunian masih longgar sehingga mudah mendapat meja favorit.',
+    desk:48,rooms:14,occ:58,addr:'Jl. Pematang Padi No. 3, Kediri, Tabanan',
+    feat:['Meja menghadap sawah','Kebun sayur','Genset cadangan','Pantai 10 menit'],
+    art:'<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMin slice" role="img" aria-label="Ilustrasi gunung dan sawah di Tabanan"><rect width="320" height="200" fill="#d9dbf7"/><path d="M-10 120 L90 40 L190 120Z" fill="#17795a" stroke="#101442" stroke-width="2.5"/><path d="M120 120 L220 56 L330 120Z" fill="#2fae74" stroke="#101442" stroke-width="2.5"/><rect y="118" width="320" height="82" fill="#c9e88f" stroke="#101442" stroke-width="2.5"/><path d="M0 146 q40 -10 80 0 t80 0 t80 0 t80 0 M0 174 q40 -10 80 0 t80 0 t80 0 t80 0" fill="none" stroke="#17795a" stroke-width="3"/><path d="M232 118 v-22 h28 v22z" fill="#ffb81c" stroke="#101442" stroke-width="2.5"/><path d="M228 96 l18 -14 l18 14z" fill="#101442"/></svg>'}
+};
+var PLANS={
+  cowork:[
+    {name:'Hot Desk',base:1250000,unit:'/ bulan',sub:'Untuk freelancer yang suka berpindah meja.',feat:['Meja bebas pilih, 07.00–22.00','Wi-Fi 300 Mbps','Kopi, teh &amp; air tanpa batas','4 jam ruang meeting / bulan','2 tamu / bulan']},
+    {name:'Dedicated Desk',base:2400000,unit:'/ bulan',pop:true,sub:'Meja tetap yang selalu menunggu Anda.',feat:['Meja tetap + loker pribadi','Akses 24 jam','10 jam ruang meeting / bulan','5 tamu / bulan','Cetak 100 halaman / bulan']},
+    {name:'Private Office',base:6800000,unit:'/ bulan',sub:'Ruang tertutup untuk tim 2–4 orang.',feat:['Ruang privat berkunci','Akses 24 jam untuk seluruh tim','30 jam ruang meeting / bulan','Alamat surat bisnis','Cetak 300 halaman / bulan']}
+  ],
+  coliving:[
+    {name:'Kamar Berbagi',base:3900000,unit:'/ orang / bulan',sub:'Dua tempat tidur, satu kamar, banyak teman baru.',feat:['Tempat tidur + lemari pribadi','Hot Desk termasuk','Listrik, air &amp; kebersihan mingguan','Dapur &amp; ruang makan bersama','Makan malam bersama tiap Rabu']},
+    {name:'Kamar Privat',base:6500000,unit:'/ bulan',pop:true,sub:'Kamar sendiri dengan kamar mandi dalam.',feat:['Kamar mandi dalam, AC','Dedicated Desk termasuk','Listrik, air &amp; kebersihan 2× / minggu','Dapur &amp; ruang makan bersama','Laundry 8 kg / minggu']},
+    {name:'Studio Sawah',base:9800000,unit:'/ bulan',sub:'Studio mandiri dengan balkon menghadap sawah.',feat:['Studio 28 m² + dapur kecil','Dedicated Desk termasuk','Kebersihan 3× / minggu','Parkir motor 1 unit','Prioritas ruang meeting']}
+  ]
+};
+function priceOf(base,mult,term){return Math.round(base*mult*(term===6?0.9:1)/5000)*5000;}
+var CHECK='<svg viewBox="0 0 18 18" aria-hidden="true"><rect x="1" y="1" width="16" height="16" fill="#ffb81c" stroke="#101442" stroke-width="1.8"/><path d="M5 9.4l2.6 2.6L13 6.4" fill="none" stroke="#101442" stroke-width="2"/></svg>';
+var PIN='<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1.5a5.5 5.5 0 0 0-5.5 5.5C3.5 11 9 16.5 9 16.5S14.5 11 14.5 7A5.5 5.5 0 0 0 9 1.5z" fill="#ffb81c" stroke="#101442" stroke-width="1.6"/><circle cx="9" cy="7" r="2" fill="#101442"/></svg>';
+
+var state={city:'ubud',type:'cowork',term:1};
+var locTabs;
+
+function renderLoc(){
+  var c=CITIES[state.city],from=priceOf(PLANS.cowork[0].base,c.mult,1);
+  $('#loc-panel').innerHTML=
+    '<div class="loc-art">'+c.art+'</div>'+
+    '<div class="loc-body"><div class="lb-a"><p class="kicker-s">'+esc(c.kab)+'</p><h3>Sinyal Sawah '+esc(c.name)+'</h3><p class="loc-tag">'+esc(c.tag)+'</p><p>'+esc(c.desc)+'</p>'+
+    '<p class="addr" style="margin-top:16px">'+PIN+'<span>'+esc(c.addr)+'</span></p></div>'+
+    '<div class="lb-b"><ul class="loc-nums"><li><b>'+c.desk+'</b><span>meja kerja</span></li><li><b>'+c.rooms+'</b><span>kamar co-living</span></li><li><b>'+c.occ+'%</b><span>hunian saat ini</span></li></ul>'+
+    '<ul class="tags">'+c.feat.map(function(f){return '<li>'+esc(f)+'</li>';}).join('')+'</ul>'+
+    '<p class="from">Mulai <b>'+rp(from)+'</b> / bulan</p>'+
+    '<div class="btn-row"><button type="button" class="btn btn-gold" data-open="join" data-mode="visit" data-city="'+state.city+'">Jadwalkan kunjungan</button><a class="btn" href="#paket">Lihat harga '+esc(c.name)+'</a></div></div></div>';
+}
+function renderPlans(){
+  var c=CITIES[state.city],list=PLANS[state.type];
+  $('#plans').innerHTML=list.map(function(p){
+    var now=priceOf(p.base,c.mult,state.term),full=priceOf(p.base,c.mult,1);
+    return '<article class="plan'+(p.pop?' pop':'')+'">'+(p.pop?'<span class="badge">Paling dipilih</span>':'')+
+      '<h3>'+p.name+'</h3><p class="sub">'+p.sub+'</p>'+
+      '<p class="was">'+(state.term===6?rp(full):'')+'</p>'+
+      '<p class="price">'+rp(now)+' <small>'+p.unit+'</small></p>'+
+      '<ul>'+p.feat.map(function(f){return '<li>'+CHECK+'<span>'+f+'</span></li>';}).join('')+'</ul>'+
+      '<button type="button" class="btn '+(p.pop?'btn-gold':'')+'" data-open="join" data-plan="'+p.name+'" data-city="'+state.city+'">Pilih '+p.name+'</button></article>';
+  }).join('');
+  $('#daypass-text').innerHTML='<b>Hanya mampir sehari?</b> Day pass '+esc(c.name)+': <b>'+rp(priceOf(150000,c.mult,1))+'</b> / hari, tanpa langganan.';
+}
+function syncSeg(sel,attr,val){$$(sel+' button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset[attr])===String(val)?'true':'false');});}
+function setCity(id){
+  state.city=id;renderLoc();renderPlans();syncSeg('#seg-city','city',id);if(locTabs)locTabs.show(id);
+}
+locTabs=initTabs($('#loc-tabs'),{shared:true,onSelect:function(id){setCity(id);}});
+$$('#seg-city button').forEach(function(b){b.addEventListener('click',function(){setCity(b.dataset.city);});});
+$$('#seg-type button').forEach(function(b){b.addEventListener('click',function(){state.type=b.dataset.type;syncSeg('#seg-type','type',state.type);renderPlans();});});
+$$('#seg-term button').forEach(function(b){b.addEventListener('click',function(){state.term=+b.dataset.term;syncSeg('#seg-term','term',state.term);renderPlans();});});
+setCity('ubud');
+
+/* ===== form gabung ===== */
+var jf=$('#join-form');
+function openJoin(o){
+  o=o||{};
+  jf.reset();jf.hidden=false;$('#join-ok').hidden=true;
+  $$('.field',jf).forEach(function(f){f.classList.remove('has-err');var m=$('.err-msg',f);if(m)m.textContent='';});
+  $$('[aria-invalid]',jf).forEach(function(i){i.removeAttribute('aria-invalid');});
+  var visit=o.mode==='visit';
+  $('#join-title').textContent=visit?'Jadwalkan kunjungan':(o.plan?'Daftar paket '+o.plan:'Gabung Sinyal Sawah');
+  $('#j-tgl-label').textContent=visit?'Tanggal kunjungan':'Tanggal mulai';
+  $('#j-submit').textContent=visit?'Jadwalkan':'Kirim permintaan';
+  jf.elements.lokasi.value=o.city||state.city;
+  if(o.plan){jf.elements.paket.value=o.plan;}
+  openDlg('dlg-join');
+}
+jf.addEventListener('input',function(e){var f=e.target.closest('.field');if(f){f.classList.remove('has-err');var m=$('.err-msg',f);if(m)m.textContent='';e.target.removeAttribute('aria-invalid');}});
+jf.addEventListener('submit',function(e){
+  e.preventDefault();
+  var el=jf.elements,first=null;
+  function setErr(input,msg){
+    var w=input.closest('.field');w.classList.toggle('has-err',!!msg);$('.err-msg',w).textContent=msg||'';
+    input.setAttribute('aria-invalid',msg?'true':'false');if(msg&&!first)first=input;
+  }
+  setErr(el.nama,el.nama.value.trim().length<3?'Tulis nama lengkap, minimal 3 huruf.':'');
+  setErr(el.email,/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.email.value.trim())?'':'Format email belum benar, contoh: nama@email.com.');
+  var wa=el.wa.value.replace(/[\s\-+]/g,'');
+  setErr(el.wa,/^(0|62)8\d{7,11}$/.test(wa)?'':'Nomor WhatsApp belum benar, contoh: 0812 3456 7890.');
+  setErr(el.tgl,(el.tgl.value&&el.tgl.value>=TODAY)?'':'Pilih tanggal hari ini atau sesudahnya.');
+  if(first){first.focus();return;}
+  var nm=el.nama.value.trim().split(/\s+/)[0],lk=CITIES[el.lokasi.value].name,pk=el.paket.value;
+  $('#join-ok-text').textContent='Terima kasih, '+nm+'. Tim '+lk+' akan menghubungi lewat WhatsApp untuk '+(pk.indexOf('Belum')===0?'mengatur kunjungan':'paket '+pk)+' pada '+fmtDate(el.tgl.value)+'.';
+  jf.hidden=true;$('#join-ok').hidden=false;
+});
+
+/* ===== delegasi tombol buka dialog & tab portal ===== */
+document.addEventListener('click',function(e){
+  var o=e.target.closest('[data-open]');
+  if(o&&o.dataset.open==='join'){setMenu(false);openJoin({mode:o.dataset.mode,plan:o.dataset.plan,city:o.dataset.city});}
+  var pt=e.target.closest('[data-portal-tab]');
+  if(pt){portalTabs.show(pt.dataset.portalTab);}
+  var l=e.target.closest('#loc-panel a[href="#paket"]');
+  if(l){syncSeg('#seg-city','city',state.city);}
+});
+
+/* ===== PORTAL: state ===== */
+var PLAN_BASE={'Hot Desk':1250000,'Dedicated Desk':2400000,'Private Office':6800000};
+var PLAN_DESK={'Hot Desk':'Meja bebas pilih','Dedicated Desk':'Meja D-14, lantai 2','Private Office':'Ruang P-3, lantai 3'};
+var S={
+  member:{name:'Nadia Prameswari',ini:'NP',id:'SSW-0217',plan:'Dedicated Desk',since:'2026-03-12',until:'2027-03-12',frozen:false,auto:true},
+  filter:'semua',
+  invoices:[
+    {id:'INV-2026-1121',desc:'Add-on loker &amp; parkir motor — Nov 2026',due:'2026-11-20',amount:275000,status:'menunggu'},
+    {id:'INV-2026-1101',desc:'Dedicated Desk — Nov 2026',due:'2026-11-10',amount:2400000,status:'terlambat'},
+    {id:'INV-2026-1001',desc:'Dedicated Desk — Okt 2026',due:'2026-10-10',amount:2400000,status:'lunas',paid:'2026-10-08'},
+    {id:'INV-2026-0901',desc:'Dedicated Desk — Sep 2026',due:'2026-09-10',amount:2400000,status:'lunas',paid:'2026-09-09'},
+    {id:'INV-2026-0816',desc:'Add-on ruang meeting 5 jam — Agu 2026',due:'2026-08-26',amount:450000,status:'lunas',paid:'2026-08-20'},
+    {id:'INV-2026-0801',desc:'Dedicated Desk — Agu 2026',due:'2026-08-10',amount:2400000,status:'lunas',paid:'2026-08-05'},
+    {id:'INV-2026-0701',desc:'Dedicated Desk — Jul 2026',due:'2026-07-10',amount:2400000,status:'lunas',paid:'2026-07-10'},
+    {id:'INV-2026-0601',desc:'Dedicated Desk — Jun 2026',due:'2026-06-10',amount:2400000,status:'lunas',paid:'2026-06-03'},
+    {id:'INV-2026-0501',desc:'Dedicated Desk — Mei 2026',due:'2026-05-10',amount:2400000,status:'lunas',paid:'2026-05-09'},
+    {id:'INV-2026-0401',desc:'Dedicated Desk — Apr 2026',due:'2026-04-10',amount:2400000,status:'lunas',paid:'2026-04-04'},
+    {id:'INV-2026-0312',desc:'Deposit &amp; biaya pendaftaran',due:'2026-03-12',amount:3150000,status:'lunas',paid:'2026-03-12'}
+  ],
+  doors:[
+    {id:'main',name:'Pintu utama &amp; lobi',rule:'24 jam · semua paket',from:0,to:24},
+    {id:'floor',name:'Lantai coworking (lt. 2)',rule:'24 jam · Dedicated Desk ke atas',from:0,to:24},
+    {id:'meet',name:'Ruang meeting A–C',rule:'07.00–22.00 · harus bebas tagihan terlambat',from:7,to:22,needPaid:true},
+    {id:'yoga',name:'Yoga deck &amp; rooftop',rule:'05.00–22.00 · semua paket',from:5,to:22},
+    {id:'park',name:'Gerbang parkir motor',rule:'24 jam · add-on parkir',from:0,to:24}
+  ],
+  devices:[
+    {id:'d1',name:'iPhone 15 — Nadia',type:'Bluetooth + QR',last:'Hari ini, 08:14'},
+    {id:'d2',name:'Kartu RFID #A-0412',type:'RFID',last:'Kemarin, 21:40'},
+    {id:'d3',name:'Pixel 7 (lama)',type:'Bluetooth',last:'2 Okt 2026'}
+  ],
+  log:[
+    {t:'Hari ini · 08:15',door:'Lantai coworking',m:'RFID',ok:true},
+    {t:'Hari ini · 08:14',door:'Pintu utama &amp; lobi',m:'Bluetooth',ok:true},
+    {t:'Kemarin · 21:40',door:'Gerbang parkir motor',m:'RFID',ok:true},
+    {t:'Kemarin · 16:05',door:'Ruang meeting A–C',m:'QR',ok:false,note:'Tagihan terlambat'},
+    {t:'Kemarin · 07:52',door:'Pintu utama &amp; lobi',m:'Bluetooth',ok:true},
+    {t:'11 Nov · 18:30',door:'Yoga deck &amp; rooftop',m:'QR',ok:true},
+    {t:'11 Nov · 09:03',door:'Pintu utama &amp; lobi',m:'Bluetooth',ok:true},
+    {t:'10 Nov · 22:47',door:'Pintu utama &amp; lobi',m:'RFID',ok:true},
+    {t:'10 Nov · 14:20',door:'Ruang meeting A–C',m:'QR',ok:true},
+    {t:'9 Nov · 10:11',door:'Lantai coworking',m:'Bluetooth',ok:true}
+  ],
+  min:14*60+32,
+  qrN:1,qrLeft:30
+};
+function clock(){var h=Math.floor(S.min/60),m=S.min%60;return (h<10?'0':'')+h+':'+(m<10?'0':'')+m;}
+function unpaid(){return S.invoices.filter(function(i){return i.status!=='lunas';});}
+function accessState(){
+  if(S.member.frozen)return 'frozen';
+  if(S.invoices.some(function(i){return i.status==='terlambat';}))return 'restricted';
+  return 'full';
+}
+function meter(label,val,max,unit){
+  var r=val/max,cls=r>=1?'bad':(r>=.8?'warn':''),extra=r>=1?' · habis':(r>=.8?' · hampir habis':'');
+  return '<div class="mrow"><div class="mrow-top"><span>'+esc(label)+'</span><b>'+val+' dari '+max+' '+esc(unit)+extra+'</b></div><div class="meter '+cls+'" role="progressbar" aria-label="'+esc(label)+'" aria-valuenow="'+val+'" aria-valuemin="0" aria-valuemax="'+max+'"><i style="width:'+Math.min(100,r*100)+'%"></i></div></div>';
+}
+function statusChip(s){return s==='lunas'?'<span class="chip chip-ok">Lunas</span>':(s==='terlambat'?'<span class="chip chip-bad">Terlambat</span>':'<span class="chip chip-warn">Menunggu</span>');}
+
+/* ===== PORTAL: render ===== */
+function renderHead(){
+  var m=S.member,st=accessState(),chips='';
+  chips+='<span class="chip chip-mute">'+esc(m.plan)+'</span>';
+  chips+=st==='full'?'<span class="chip chip-ok">Akses penuh</span>':(st==='frozen'?'<span class="chip chip-mute">Dibekukan</span>':'<span class="chip chip-warn">Akses dibatasi</span>');
+  $('#win-head').innerHTML='<div class="who"><span class="avatar" aria-hidden="true">'+m.ini+'</span><div><h3>'+esc(m.name)+'</h3><p class="meta">'+m.id+' · Ubud · anggota sejak '+fmtDate(m.since)+'</p></div></div><div class="chips">'+chips+'</div>';
+  var n=unpaid().length,c=$('#cnt-unpaid');c.hidden=n===0;c.textContent=n;
+}
+function renderMember(){
+  var m=S.member,nextAmt=PLAN_BASE[m.plan];
+  $('#pp-anggota').innerHTML=
+    '<div class="grid-2"><article class="card"><h4>Profil keanggotaan</h4>'+
+    '<dl class="dl"><div><dt>Paket</dt><dd>'+esc(m.plan)+'</dd></div><div><dt>Tempat</dt><dd>Ubud · '+esc(PLAN_DESK[m.plan])+'</dd></div><div><dt>Anggota sejak</dt><dd>'+fmtDate(m.since)+'</dd></div><div><dt>Kontrak sampai</dt><dd>'+fmtDate(m.until)+'</dd></div><div><dt>Tagihan berikutnya</dt><dd>'+(m.frozen?'Dihentikan sementara':'1 Des 2026 · '+rp(nextAmt))+'</dd></div></dl>'+
+    '<div class="btn-row"><button type="button" class="btn btn-sm" data-act="change-plan">Ganti paket</button><button type="button" class="btn btn-sm" data-act="extend">Perpanjang kontrak</button>'+
+    (m.frozen?'<button type="button" class="btn btn-sm btn-gold" data-act="unfreeze">Aktifkan kembali</button>':'<button type="button" class="btn btn-sm btn-danger" data-act="freeze">Bekukan</button>')+'</div></article>'+
+    '<article class="card"><h4>Pemakaian bulan ini</h4>'+
+    meter('Ruang meeting',6,10,'jam')+meter('Tamu',3,5,'orang')+meter('Cetak',48,100,'halaman')+meter('Kunjungan ke hub lain',1,4,'kali')+
+    '<p class="note">Kuota diperbarui setiap tanggal 1. Phone booth tidak dibatasi.</p></article></div>'+
+    '<div class="card"><h4>Tamu terdaftar minggu ini</h4><div class="scroll" tabindex="0" role="region" aria-label="Daftar tamu terdaftar"><table class="tbl" style="min-width:480px"><thead><tr><th>Nama tamu</th><th>Tanggal</th><th>Keperluan</th><th>Status</th></tr></thead><tbody>'+
+    '<tr><td>Gede Mahendra</td><td>11 Nov 2026</td><td>Rapat klien</td><td><span class="chip chip-ok">Hadir</span></td></tr>'+
+    '<tr><td>Ayu Lestari</td><td>12 Nov 2026</td><td>Sesi kerja bersama</td><td><span class="chip chip-ok">Hadir</span></td></tr>'+
+    '<tr><td>Johan Pratama</td><td>14 Nov 2026</td><td>Wawancara kandidat</td><td><span class="chip chip-warn">Dijadwalkan</span></td></tr>'+
+    '</tbody></table></div></div>';
+}
+function renderInvoices(){
+  var un=unpaid(),total=un.reduce(function(a,i){return a+i.amount;},0),late=S.invoices.filter(function(i){return i.status==='terlambat';}).length;
+  var list=S.invoices.filter(function(i){return S.filter==='semua'||i.status===S.filter;});
+  var m=S.member,nextAmt=PLAN_BASE[m.plan];
+  var rows=list.length?list.map(function(i){
+    var act=i.status==='lunas'?'<button type="button" class="btn btn-sm" data-act="dl" data-id="'+i.id+'">Unduh</button>':'<button type="button" class="btn btn-sm btn-gold" data-act="pay" data-id="'+i.id+'">Bayar</button>';
+    var due=i.status==='lunas'?'Dibayar '+fmtDate(i.paid):fmtDate(i.due);
+    return '<tr><td class="num">'+i.id+'</td><td>'+i.desc+'</td><td>'+due+'</td><td class="r num">'+rp(i.amount)+'</td><td>'+statusChip(i.status)+'</td><td>'+act+'</td></tr>';
+  }).join(''):'<tr><td colspan="6" class="empty">Tidak ada tagihan dengan status ini.</td></tr>';
+  function fb(f,l){return '<button type="button" data-act="filter" data-f="'+f+'" aria-pressed="'+(S.filter===f)+'">'+l+'</button>';}
+  $('#pp-tagihan').innerHTML=
+    '<div class="sums"><div class="sum'+(total?' bad':'')+'"><span>Total belum dibayar</span><b>'+rp(total)+'</b><span>'+(un.length?un.length+' tagihan'+(late?', '+late+' terlambat':''):'Semua tagihan lunas')+'</span></div>'+
+    '<div class="sum"><span>Tagihan berikutnya</span><b>'+(m.frozen?'—':rp(nextAmt))+'</b><span>'+(m.frozen?'Keanggotaan dibekukan':'Terbit 1 Des 2026')+'</span></div>'+
+    '<div class="sum"><span>Bayar otomatis</span><div class="switch"><button type="button" class="sw" role="switch" aria-checked="'+m.auto+'" aria-label="Bayar otomatis dengan kartu berakhiran 4421" data-act="auto"></button><span>'+(m.auto?'Aktif · kartu •••• 4421':'Nonaktif')+'</span></div></div></div>'+
+    '<div class="tbar"><div class="filters" role="group" aria-label="Saring status tagihan">'+fb('semua','Semua')+fb('menunggu','Menunggu')+fb('terlambat','Terlambat')+fb('lunas','Lunas')+'</div>'+
+    (un.length?'<button type="button" class="btn btn-sm btn-indigo" data-act="pay-all">Bayar semua ('+rp(total)+')</button>':'')+'</div>'+
+    '<div class="scroll" tabindex="0" role="region" aria-label="Daftar tagihan, geser untuk melihat kolom lain"><table class="tbl"><thead><tr><th>No. tagihan</th><th>Keterangan</th><th>Jatuh tempo</th><th class="r">Jumlah</th><th>Status</th><th><span class="sr">Aksi</span></th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+function renderAccess(){
+  var st=accessState(),ban;
+  if(st==='full')ban='<div class="banner full"><b>✓ Akses penuh aktif.</b> Semua pintu sesuai paket Anda bisa dibuka.</div>';
+  else if(st==='restricted')ban='<div class="banner restricted"><span><b>! Akses dibatasi.</b> Ada tagihan terlambat, jadi ruang meeting terkunci. Pintu lain tetap terbuka.</span><button type="button" class="btn btn-sm btn-gold" data-act="pay-late">Bayar tagihan terlambat</button></div>';
+  else ban='<div class="banner frozen"><span><b>Keanggotaan dibekukan.</b> Semua pintu terkunci sampai Anda mengaktifkan kembali.</span><button type="button" class="btn btn-sm btn-gold" data-act="unfreeze">Aktifkan kembali</button></div>';
+  var doors=S.doors.map(function(d){return '<li><div><b>'+d.name+'</b><small>'+d.rule+'</small></div><button type="button" class="btn btn-sm" data-act="door" data-door="'+d.id+'">Coba buka</button></li>';}).join('');
+  var devs=S.devices.length?S.devices.map(function(d){return '<li><div><b>'+esc(d.name)+'</b><small>'+esc(d.type)+' · terakhir '+esc(d.last)+'</small></div><button type="button" class="btn btn-sm btn-danger" data-act="revoke" data-dev="'+d.id+'">Cabut</button></li>';}).join(''):'<li><small>Belum ada perangkat terdaftar.</small></li>';
+  var log=S.log.map(function(l){return '<tr><td class="num">'+l.t+'</td><td>'+l.door+'</td><td>'+l.m+'</td><td>'+(l.ok?'<span class="chip chip-ok">Diizinkan</span>':'<span class="chip chip-bad">Ditolak</span>')+(l.note?' <small>'+esc(l.note)+'</small>':'')+'</td></tr>';}).join('');
+  $('#pp-akses').innerHTML=ban+
+    '<div class="grid-2"><article class="card qr-card"><h4>Kunci digital</h4><div class="qr" id="qr">'+qrSvg('SSW-0217-'+S.qrN,'Kode QR akses, berganti setiap 30 detik')+'</div><p>Berlaku <b id="qr-left">'+S.qrLeft+'</b> detik lagi</p><div class="meter"><i id="qr-bar" style="width:'+(S.qrLeft/30*100)+'%"></i></div><button type="button" class="btn btn-sm" data-act="qr">Perbarui sekarang</button></article>'+
+    '<article class="card"><h4>Pintu &amp; ruang</h4><ul class="doors">'+doors+'</ul></article></div>'+
+    '<div class="grid-2 g-log"><article class="card"><h4>Perangkat terdaftar</h4><ul class="devs">'+devs+'</ul></article>'+
+    '<article class="card"><h4>Riwayat akses</h4><div class="scroll" tabindex="0" role="region" aria-label="Riwayat akses terbaru" style="max-height:340px;overflow:auto"><table class="tbl" style="min-width:460px"><thead><tr><th>Waktu</th><th>Pintu</th><th>Metode</th><th>Hasil</th></tr></thead><tbody>'+log+'</tbody></table></div></article></div>';
+}
+var portalRoot=$('#portal-app');
+function renderAll(){
+  var a=document.activeElement,sel=null;
+  if(a&&portalRoot.contains(a)&&a.dataset&&a.dataset.act){
+    sel='button'+a.getAttributeNames().filter(function(n){return n.indexOf('data-')===0;}).map(function(n){return '['+n+'="'+CSS.escape(a.getAttribute(n))+'"]';}).join('');
+  }
+  renderHead();renderMember();renderInvoices();renderAccess();
+  if(sel){var n=$(sel,portalRoot);if(n)n.focus();}
+}
+
+/* ===== PORTAL: aksi ===== */
+function confirmDlg(o){
+  $('#cf-title').textContent=o.title;$('#cf-body').textContent=o.body;$('#cf-extra').innerHTML=o.extra||'';
+  var ok=$('#cf-ok');ok.textContent=o.ok||'Ya, lanjutkan';
+  ok.onclick=function(){closeDlg($('#dlg-confirm'));o.onOk&&o.onOk();};
+  openDlg('dlg-confirm');
+}
+function addMonths(iso,n){var p=iso.split('-').map(Number),d=new Date(Date.UTC(p[0],p[1]-1+n,p[2]));return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');}
+
+var payIds=[],payBusy=false;
+function openPay(ids){
+  payIds=ids;payBusy=false;
+  var items=S.invoices.filter(function(i){return ids.indexOf(i.id)>-1;}),total=items.reduce(function(a,i){return a+i.amount;},0);
+  $('#pay-title').textContent=items.length>1?'Bayar '+items.length+' tagihan':'Bayar tagihan';
+  $('#pay-list').innerHTML=items.map(function(i){return '<div class="pay-row"><span><b class="mono" style="font-size:.85rem">'+i.id+'</b><br>'+i.desc+'</span><b>'+rp(i.amount)+'</b></div>';}).join('')+'<div class="pay-total"><span>Total</span><span>'+rp(total)+'</span></div>';
+  var go=$('#pay-go');go.disabled=false;go.textContent='Bayar sekarang';
+  openDlg('dlg-pay');
+}
+$('#pay-go').addEventListener('click',function(){
+  if(payBusy)return;payBusy=true;
+  var go=this;go.disabled=true;go.textContent='Memproses…';
+  var method=$('input[name="pm"]:checked').value,before=accessState();
+  setTimeout(function(){
+    var total=0;
+    S.invoices.forEach(function(i){if(payIds.indexOf(i.id)>-1){i.status='lunas';i.paid=TODAY;total+=i.amount;}});
+    closeDlg($('#dlg-pay'));payBusy=false;
+    renderAll();
+    toast('Pembayaran '+rp(total)+' lewat '+method+' diterima. (Demo)','good');
+    if(before==='restricted'&&accessState()==='full')setTimeout(function(){toast('Akses ruang meeting dibuka kembali.','good');},900);
+  },1100);
+});
+
+function checkDoor(d){
+  var st=accessState(),h=Math.floor(S.min/60);
+  if(st==='frozen')return {ok:false,note:'Keanggotaan dibekukan'};
+  if(d.needPaid&&st==='restricted')return {ok:false,note:'Tagihan terlambat'};
+  if(h<d.from||h>=d.to)return {ok:false,note:'Di luar jam akses'};
+  return {ok:true};
+}
+function newQr(){S.qrN++;S.qrLeft=30;var q=$('#qr');if(q)q.innerHTML=qrSvg('SSW-0217-'+S.qrN,'Kode QR akses, berganti setiap 30 detik');upQr();}
+function upQr(){var l=$('#qr-left'),b=$('#qr-bar');if(l)l.textContent=S.qrLeft;if(b)b.style.width=(S.qrLeft/30*100)+'%';}
+setInterval(function(){S.qrLeft--;if(S.qrLeft<=0)newQr();else upQr();},1000);
+
+portalRoot.addEventListener('click',function(e){
+  var b=e.target.closest('[data-act]');if(!b)return;
+  var act=b.dataset.act,id=b.dataset.id;
+  if(act==='filter'){S.filter=b.dataset.f;renderAll();return;}
+  if(act==='pay'){openPay([id]);return;}
+  if(act==='pay-all'){openPay(unpaid().map(function(i){return i.id;}));return;}
+  if(act==='pay-late'){openPay(S.invoices.filter(function(i){return i.status==='terlambat';}).map(function(i){return i.id;}));return;}
+  if(act==='dl'){toast('Ini demo — unduh PDF '+id+' tidak aktif.');return;}
+  if(act==='auto'){S.member.auto=!S.member.auto;renderAll();toast(S.member.auto?'Bayar otomatis diaktifkan.':'Bayar otomatis dimatikan.');return;}
+  if(act==='qr'){newQr();toast('Kode QR diperbarui.');return;}
+  if(act==='door'){
+    var d=S.doors.filter(function(x){return x.id===b.dataset.door;})[0],r=checkDoor(d);
+    S.min+=1;S.log.unshift({t:'Hari ini · '+clock(),door:d.name,m:'QR',ok:r.ok,note:r.note});
+    if(S.log.length>14)S.log.pop();
+    renderAll();
+    toast(r.ok?'Pintu terbuka: '+d.name.replace(/&amp;/g,'&')+'.':'Ditolak: '+r.note+'.'+(r.note==='Tagihan terlambat'?' Bayar dulu di tab Tagihan.':''),r.ok?'good':'bad');
+    return;
+  }
+  if(act==='revoke'){
+    var dv=S.devices.filter(function(x){return x.id===b.dataset.dev;})[0];
+    confirmDlg({title:'Cabut akses perangkat?',body:'Perangkat “'+dv.name+'” tidak bisa lagi membuka pintu. Anda dapat mendaftarkannya lagi di resepsi.',ok:'Cabut akses',onOk:function(){S.devices=S.devices.filter(function(x){return x.id!==dv.id;});renderAll();toast('Akses '+dv.name+' dicabut.');}});
+    return;
+  }
+  if(act==='freeze'){
+    confirmDlg({title:'Bekukan keanggotaan?',body:'Tagihan bulanan dihentikan dan semua pintu terkunci selama masa beku. Anda bisa mengaktifkannya kembali kapan saja.',ok:'Bekukan',onOk:function(){S.member.frozen=true;renderAll();toast('Keanggotaan dibekukan.');}});
+    return;
+  }
+  if(act==='unfreeze'){S.member.frozen=false;renderAll();toast('Keanggotaan aktif kembali.','good');return;}
+  if(act==='extend'){
+    confirmDlg({title:'Perpanjang kontrak 6 bulan?',body:'Kontrak diperpanjang sampai '+fmtDate(addMonths(S.member.until,6))+' dan harga bulanan mendapat potongan 10%.',ok:'Perpanjang',onOk:function(){S.member.until=addMonths(S.member.until,6);renderAll();toast('Kontrak diperpanjang sampai '+fmtDate(S.member.until)+'.','good');}});
+    return;
+  }
+  if(act==='change-plan'){
+    var opts=Object.keys(PLAN_BASE).map(function(k){return '<option'+(k===S.member.plan?' selected':'')+'>'+k+'</option>';}).join('');
+    confirmDlg({title:'Ganti paket',body:'Paket baru berlaku mulai periode tagihan berikutnya, 1 Des 2026.',ok:'Simpan paket',
+      extra:'<div class="field"><label for="cf-plan">Pilih paket</label><select id="cf-plan">'+opts+'</select></div>',
+      onOk:function(){var v=$('#cf-plan').value;S.member.plan=v;renderAll();toast('Paket diganti ke '+v+'.','good');}});
+    return;
+  }
+});
+
+var portalTabs=initTabs($('#ptabs'));
+portalTabs.show('anggota');
+renderAll();
+
+/* ===== acara ===== */
+var EVENTS=[
+  {d:'20',m:'Nov',day:'Jumat',time:'18.30',city:'canggu',title:'Demo Night: Produk Buatan Anggota',where:'Rooftop Canggu',reg:false},
+  {d:'25',m:'Nov',day:'Rabu',time:'06.30',city:'ubud',title:'Yoga Subuh di Atas Sawah',where:'Yoga deck Ubud',reg:true},
+  {d:'28',m:'Nov',day:'Sabtu',time:'10.00',city:'tabanan',title:'Workshop: Pajak untuk Freelancer &amp; Pekerja Remote',where:'Ruang serbaguna Tabanan',reg:false},
+  {d:'03',m:'Des',day:'Kamis',time:'19.00',city:'ubud',title:'Makan Malam Founders Circle',where:'Dapur komunal Ubud',reg:false},
+  {d:'11',m:'Des',day:'Jumat',time:'16.30',city:'tabanan',title:'Sunset Sprint: Kerja Bareng 2 Jam Fokus',where:'Teras sawah Tabanan',reg:false},
+  {d:'12',m:'Des',day:'Sabtu',time:'09.00',city:'canggu',title:'Pasar Pagi Kreator &amp; Sarapan Bersama',where:'Halaman Canggu',reg:false}
+];
+var evFilter='all';
+function renderEvents(){
+  var list=EVENTS.filter(function(e){return evFilter==='all'||e.city===evFilter;});
+  $('#evs').innerHTML=list.map(function(e){
+    var i=EVENTS.indexOf(e);
+    return '<article class="ev"><div class="ev-date" aria-hidden="true"><b>'+e.d+'</b><span>'+e.m+'</span></div><div><h3>'+e.title+'</h3><p>'+e.day+', '+e.time+' WITA · '+e.where+'</p></div>'+
+      '<button type="button" class="btn btn-sm" data-ev-reg="'+i+'" aria-pressed="'+e.reg+'">'+(e.reg?'✓ Terdaftar':'Daftar')+'</button></article>';
+  }).join('');
+}
+$('#evs').addEventListener('click',function(e){
+  var b=e.target.closest('[data-ev-reg]');if(!b)return;
+  var ev=EVENTS[+b.dataset.evReg];ev.reg=!ev.reg;
+  var idx=b.dataset.evReg;renderEvents();
+  var nb=$('[data-ev-reg="'+idx+'"]');if(nb)nb.focus();
+  toast(ev.reg?'Terdaftar: '+ev.title.replace(/&amp;/g,'&')+'.':'Pendaftaran dibatalkan.',ev.reg?'good':'');
+});
+$$('#seg-ev button').forEach(function(b){b.addEventListener('click',function(){evFilter=b.dataset.ev;syncSeg('#seg-ev','ev',evFilter);renderEvents();});});
+renderEvents();
+})();
+</script>
+</body>
+</html>
